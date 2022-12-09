@@ -8,7 +8,10 @@
         v-bind:key="column"
         v-on:click="toggleSortState(index)"
       >
-        <div class="min-w-full flex justify-between">
+        <div
+          class="min-w-full flex justify-between"
+          v-bind:class="column === 'description' ? 'w-80' : ''"
+        >
           {{ column }}
           <div v-if="sortIndex === index" class="text-xl">
             <IconSortAsc v-if="sortState === 'asc'" />

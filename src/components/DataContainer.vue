@@ -13,7 +13,7 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
-import Table from './Table.vue'
+import Table from './table/Table.vue'
 import PopupModal from './widgets/PopupModal.vue'
 import { fetchDemoData, readableContent } from './content/readable'
 

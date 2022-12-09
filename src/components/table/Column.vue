@@ -46,8 +46,8 @@
 import { IconCheck, IconCross } from '@iconify-prerendered/vue-lucide'
 import { IconExpandContent } from '@iconify-prerendered/vue-material-symbols'
 import { Options, Vue, prop } from 'vue-class-component'
-import Button from './widgets/Button.vue'
-import { popupModalStore } from './content/stores'
+import Button from '../widgets/Button.vue'
+import { popupModalStore } from '../content/stores'
 
 class Props {
   columns: string[] = prop({
@@ -68,10 +68,9 @@ class Props {
 })
 export default class Column extends Vue.with(Props) {
   expandObject(column: string, data: any) {
-    alert(column)
     popupModalStore.content = {
       title: column,
-      msg: data.toString(),
+      msg: '<strong>yo</strong>',
     }
     popupModalStore.shown = true
   }

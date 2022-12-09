@@ -5,41 +5,47 @@
     v-on:click="removePopup()"
   >
     <div
-      class="w-full max-w-2xl text-primary bg-white shadow-lg rounded-lg p-8"
+      class="bg-white rounded md:w-1/3 w-1/2 border shadow-lg"
+      v-on:click.stop="() => 0"
     >
-      <h1>{{ title }}</h1>
-      <p>
-        {{ msg }}
-      </p>
-      <div class="flex justify-between w-full">
-        <Button v-bind:action="removePopup"> Close </Button>
-        <Button v-bind:action="acceptPopup"> Ok </Button>
+      <div class="rounded-t bg-teal-500">
+        <div class="bg-primary relative py-3 px-2 flex">
+          <span class="font-semibold text-white md:text-base text-sm">{{
+            content.title
+          }}</span>
+          <div
+            class="absolute right-0 top-0 -mr-4 -mt-4 border cursor-pointer shadow-lg bg-white z-10 rounded-full p-0"
+          >
+            <IconInfoRounded width="40" height="40" />
+          </div>
+        </div>
+      </div>
+      <div class="bg-gray-200 md:text-base text-sm border-b p-2 py-2 pb-8">
+        <p>{{ content.msg }}</p>
+      </div>
+      <div class="bg-grey p-2 flex justify-end rounded-b">
+        <Button color="alert" v-bind:action="removePopup"> Close </Button>
+        <Button v-if="acceptActionExists()" v-bind:action="acceptPopup">
+          OK
+        </Button>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Options, Vue, prop } from 'vue-class-component'
+import { IconInfoRounded } from '@iconify-prerendered/vue-material-symbols'
+import { Options, Vue } from 'vue-class-component'
 import { popupModalStore } from '../content/stores'
 import Button from './Button.vue'
-
-class Props {
-  title: string = prop({
-    required: true,
-  })
-  msg: string = prop({
-    required: true,
-  })
-  okAction?: () => void = prop({})
-}
 
 @Options({
   components: {
     Button,
+    IconInfoRounded,
   },
 })
-export default class PopupModal extends Vue.with(Props) {
+export default class PopupModal extends Vue {
   data() {
     return popupModalStore
   }
@@ -48,10 +54,14 @@ export default class PopupModal extends Vue.with(Props) {
     popupModalStore.shown = false
   }
 
-  acceptPopup() {
-    if (typeof this.okAction === 'undefined') return
+  acceptActionExists() {
+    return typeof popupModalStore.content.okAction !== 'undefined'
+  }
 
-    this.okAction()
+  acceptPopup() {
+    if (!this.acceptActionExists()) return
+
+    popupModalStore.content.okAction!()
   }
 }
 </script>
