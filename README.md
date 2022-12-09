@@ -8,10 +8,10 @@ Fetch a public JSON and build a responsive and sortable table in Vue 3, using Ta
 - [x] Vue 3.2 (use Script Setup)
 - [x] TailwindCSS (and we use TailwindUI as our default templates)
 - [x] Columns: Name, Descriptions, Edition(s), timeOfScreenshot, And others you like.
-- [ ] Make Column headers clickable for ASC/DESC sort
+- [x] Make Column headers clickable for ASC/DESC sort
 - [ ] Make the Edition Column a filter on Editions (which works with Sorting)
 
-## Project setup
+# Project setup
 
 ```
 pnpm install

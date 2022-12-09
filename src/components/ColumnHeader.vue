@@ -3,15 +3,13 @@
     <tr>
       <th
         scope="col"
-        class="text-sm px-6 py-4 capitalize font-bold bg-contrast text-left cursor-pointer hover:bg-contrast-700"
-        v-for="(column, index) in columns"
+        class="text-sm px-6 py-4 capitalize font-bold bg-contrast text-left cursor-pointer transition-colors hover:bg-primary-300 hover:text-white"
+        v-for="(column, index) in filteredColumns"
         v-bind:key="column"
         v-on:click="toggleSortState(index)"
       >
         <div class="min-w-full flex justify-between">
-          <div v-if="column !== 'id'">
-            {{ column }}
-          </div>
+          {{ column }}
           <div v-if="sortIndex === index" class="text-xl">
             <IconSortAsc v-if="sortState === 'asc'" />
             <IconSortDesc v-else-if="sortState === 'des'" />
@@ -51,10 +49,14 @@ class Props {
     IconSortDesc,
   },
 })
-export default class Table extends Vue.with(Props) {
+export default class ColumnHeader extends Vue.with(Props) {
   toggleSortState(index: number) {
     if (index === 1) return
     this.sortAction(index)
+  }
+
+  get filteredColumns() {
+    return [...this.columns].filter((c) => c !== 'id')
   }
 }
 </script>

@@ -1,21 +1,26 @@
 <template>
   <div v-if="loading">loading....</div>
   <div v-else>
-    <div class="flex flex-col gap-8">
+    <div
+      class="grid gap-8 grid-cols-1 2xl:grid-cols-2 justify-center content-start"
+    >
       <Table title="Editions" v-bind:source="sourceData.editions.items" />
       <Table title="Features" v-bind:source="sourceData.features.items" />
     </div>
   </div>
+  <PopupModal />
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
 import Table from './Table.vue'
+import PopupModal from './widgets/PopupModal.vue'
 import { fetchDemoData, readableContent } from './content/readable'
 
 @Options({
   components: {
     Table,
+    PopupModal,
   },
 })
 export default class DataContainer extends Vue {

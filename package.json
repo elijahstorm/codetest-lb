@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@iconify-prerendered/vue-lucide": "^0.16.1669121575",
+    "@iconify-prerendered/vue-material-symbols": "^0.16.1670570880",
     "autoprefixer": "^10",
     "core-js": "^3.26.1",
     "postcss": "^8",

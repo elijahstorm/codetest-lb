@@ -1,6 +1,6 @@
 <template>
   <div class="bg-white text-primary min-w-full min-h-full">
-    <section>
+    <section class="py-32 sm:p-16 lg:p-32">
       <DataContainer />
     </section>
   </div>
@@ -24,14 +24,10 @@ export default class App extends Vue {}
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-#app > div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
-section {
-  padding-top: 60px;
-  max-width: 900px;
+#app > div {
+  display: grid;
+  justify-content: center;
+  min-height: 100vh;
 }
 </style>

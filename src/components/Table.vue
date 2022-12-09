@@ -1,17 +1,37 @@
 <template>
   <div
-    class="p-4 rounded-md border-solid border-shadow border shadow-md overflow-auto"
+    class="p-4 rounded-md border-solid border-shadow border shadow-md overflow-hidden h-min-content"
   >
-    <h2 class="text-2xl font-bold p-4">{{ this.title }}</h2>
-    <table class="border-l border-r border-t border-solid border-primary">
-      <ColumnHeader
-        v-bind:columns="columns"
-        v-bind:sortIndex="sortIndex"
-        v-bind:sortState="sortState"
-        v-bind:sortAction="changeSortState"
+    <div class="flex justify-between items-center">
+      <h2 class="text-2xl font-bold p-4">{{ this.title }}</h2>
+      <IconHide
+        v-if="!hidden"
+        v-on:click="hideTable()"
+        width="30"
+        height="30"
+        class="cursor-pointer"
       />
-      <Column v-bind:columns="columns" v-bind:items="sorted" />
-    </table>
+      <IconExpandContent
+        v-else
+        v-on:click="hideTable()"
+        width="30"
+        height="30"
+        class="cursor-pointer"
+      />
+    </div>
+    <div v-bind:class="hidden ? 'max-h-0' : ''" class="flex overflow-auto">
+      <table
+        class="border-l border-r border-t border-solid border-primary w-full"
+      >
+        <ColumnHeader
+          v-bind:columns="columns"
+          v-bind:sortIndex="sortIndex"
+          v-bind:sortState="sortState"
+          v-bind:sortAction="changeSortState"
+        />
+        <Column v-bind:columns="columns" v-bind:items="sorted" />
+      </table>
+    </div>
   </div>
 </template>
 
@@ -19,6 +39,11 @@
 import { Options, Vue, prop } from 'vue-class-component'
 import ColumnHeader from './ColumnHeader.vue'
 import Column from './Column.vue'
+import {
+  IconHide,
+  IconExpand,
+  IconExpandContent,
+} from '@iconify-prerendered/vue-material-symbols'
 
 type SortState = 'none' | 'asc' | 'des'
 
@@ -35,12 +60,16 @@ class Props {
   components: {
     ColumnHeader,
     Column,
+    IconHide,
+    IconExpand,
+    IconExpandContent,
   },
 })
 export default class Table extends Vue.with(Props) {
   selected: number | null = null
   sortIndex: number | null = null
   sortState: SortState = 'none'
+  hidden = false
 
   changeSortState(index: number) {
     if (index === this.sortIndex) {
@@ -49,6 +78,10 @@ export default class Table extends Vue.with(Props) {
       this.sortState = 'asc'
     }
     this.sortIndex = index
+  }
+
+  hideTable() {
+    this.hidden = !this.hidden
   }
 
   get columns() {
@@ -77,9 +110,15 @@ export default class Table extends Vue.with(Props) {
 
     return items.sort((a, b) =>
       this.sortState === 'asc'
-        ? b[sortedColumn].localeCompare(a[sortedColumn])
-        : a[sortedColumn].localeCompare(b[sortedColumn]),
+        ? b[sortedColumn]?.toString().localeCompare(a[sortedColumn])
+        : a[sortedColumn]?.toString().localeCompare(b[sortedColumn]),
     )
   }
 }
 </script>
+
+<style scoped>
+.h-min-content {
+  height: min-content;
+}
+</style>

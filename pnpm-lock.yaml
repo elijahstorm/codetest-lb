@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@iconify-prerendered/vue-lucide': ^0.16.1669121575
+  '@iconify-prerendered/vue-material-symbols': ^0.16.1670570880
   '@types/jest': ^29.2.4
   '@typescript-eslint/eslint-plugin': ^5.46.0
   '@typescript-eslint/parser': ^5.46.0
@@ -36,6 +37,7 @@ specifiers:
 
 dependencies:
   '@iconify-prerendered/vue-lucide': 0.16.1669121575_vue@3.2.45
+  '@iconify-prerendered/vue-material-symbols': 0.16.1670570880_vue@3.2.45
   autoprefixer: 10.4.13_postcss@8.4.19
   core-js: 3.26.1
   postcss: 8.4.19
@@ -1518,6 +1520,14 @@ packages:
 
   /@iconify-prerendered/vue-lucide/0.16.1669121575_vue@3.2.45:
     resolution: {integrity: sha512-sm8COzHY1tVJ3a7BA4be1VTvxhs+Ceiz5Rsa/il+Hj9TsbBZLi3t+RIK3Md1wYqs1Y4Xk7XZdcDRLLblHbvYPQ==}
+    peerDependencies:
+      vue: '*'
+    dependencies:
+      vue: 3.2.45
+    dev: false
+
+  /@iconify-prerendered/vue-material-symbols/0.16.1670570880_vue@3.2.45:
+    resolution: {integrity: sha512-IIr08/yPhWZfzTjthKIWXXa65V7Mlm5ACxsnnft0tbYHgJMxrJUqOK9EP5jGyfBZkuUq0ldUCkOM8ZDSXyYeFg==}
     peerDependencies:
       vue: '*'
     dependencies:
