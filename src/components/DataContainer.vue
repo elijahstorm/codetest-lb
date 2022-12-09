@@ -1,13 +1,9 @@
 <template>
   <div v-if="loading">loading....</div>
   <div v-else>
-    <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-      <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-        <div class="overflow-hidden text-left flex flex-col gap-8">
-          <Table title="Editions" v-bind:source="sourceData.editions.items" />
-          <Table title="Features" v-bind:source="sourceData.features.items" />
-        </div>
-      </div>
+    <div class="flex flex-col gap-8">
+      <Table title="Editions" v-bind:source="sourceData.editions.items" />
+      <Table title="Features" v-bind:source="sourceData.features.items" />
     </div>
   </div>
 </template>

@@ -1,20 +1,15 @@
 <template>
   <tbody>
-    <tr
-      class="border-b"
-      v-for="(item, itemIndex) in items"
-      v-bind:key="item.id"
-    >
+    <tr class="border-b" v-for="item in items" v-bind:key="item.id">
       <td
-        class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap text-left"
+        class="text-sm font-light px-6 py-4 whitespace-nowrap text-left"
         v-for="(column, columnIndex) in columns"
         v-bind:key="column"
       >
         <span v-if="columnIndex === 0">
-          {{ itemIndex }}
+          {{ item.__index }}
         </span>
-        <span v-else-if="column === 'id'" />
-        <span v-else>
+        <span v-else-if="column !== 'id'">
           {{ item[column] ?? '--' }}
         </span>
       </td>

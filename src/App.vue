@@ -1,7 +1,9 @@
 <template>
-  <section>
-    <DataContainer />
-  </section>
+  <div class="bg-white text-primary min-w-full min-h-full">
+    <section>
+      <DataContainer />
+    </section>
+  </div>
 </template>
 
 <script lang="ts">
@@ -18,18 +20,18 @@ export default class App extends Vue {}
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+}
+#app > div {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 section {
+  padding-top: 60px;
   max-width: 900px;
 }
 </style>

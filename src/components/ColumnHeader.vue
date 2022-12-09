@@ -3,14 +3,22 @@
     <tr>
       <th
         scope="col"
-        class="text-sm font-medium text-gray-900 px-6 py-4 text-left capitalize"
-        v-for="column in columns"
+        class="text-sm px-6 py-4 capitalize font-bold bg-contrast text-left cursor-pointer hover:bg-contrast-700"
+        v-for="(column, index) in columns"
         v-bind:key="column"
+        v-on:click="toggleSortState(index)"
       >
-        <span v-if="column === 'id'" />
-        <span v-else>
-          {{ column }}
-        </span>
+        <div class="min-w-full flex justify-between">
+          <div v-if="column !== 'id'">
+            {{ column }}
+          </div>
+          <div v-if="sortIndex === index" class="text-xl">
+            <IconSortAsc v-if="sortState === 'asc'" />
+            <IconSortDesc v-else-if="sortState === 'des'" />
+          </div>
+          <IconSortAsc v-else class="invisible text-xl" />
+          <!-- this invisible icon is to make styling easier -->
+        </div>
       </th>
     </tr>
   </thead>
@@ -18,19 +26,35 @@
 
 <script lang="ts">
 import { Options, Vue, prop } from 'vue-class-component'
+import { IconSortAsc, IconSortDesc } from '@iconify-prerendered/vue-lucide'
+
+type SortState = 'none' | 'asc' | 'des'
 
 class Props {
   columns: string[] = prop({
     required: true,
   })
+  sortIndex: number | null = prop({
+    required: true,
+  })
+  sortState: SortState = prop({
+    required: true,
+  })
+  sortAction: (index: number) => void = prop({
+    required: true,
+  })
 }
 
-@Options({})
-export default class Table extends Vue.with(Props) {}
+@Options({
+  components: {
+    IconSortAsc,
+    IconSortDesc,
+  },
+})
+export default class Table extends Vue.with(Props) {
+  toggleSortState(index: number) {
+    if (index === 1) return
+    this.sortAction(index)
+  }
+}
 </script>
-
-<style scoped>
-thead tr {
-  background-color: #eeee;
-}
-</style>
