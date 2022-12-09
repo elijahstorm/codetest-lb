@@ -1,15 +1,16 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+  <section>
+    <DataContainer />
+  </section>
 </template>
 
 <script lang="ts">
-import { Options, Vue } from "vue-class-component";
-import HelloWorld from "./components/HelloWorld.vue";
+import { Options, Vue } from 'vue-class-component'
+import DataContainer from './components/DataContainer.vue'
 
 @Options({
   components: {
-    HelloWorld,
+    DataContainer,
   },
 })
 export default class App extends Vue {}
@@ -23,5 +24,12 @@ export default class App extends Vue {}
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+section {
+  max-width: 900px;
 }
 </style>
