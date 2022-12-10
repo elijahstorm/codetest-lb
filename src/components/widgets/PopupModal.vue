@@ -5,7 +5,7 @@
     v-on:click="removePopup()"
   >
     <div
-      class="bg-white rounded md:w-1/3 w-1/2 border shadow-lg"
+      class="bg-white rounded w-3/4 border shadow-lg"
       v-on:click.stop="() => 0"
     >
       <div class="rounded-t bg-teal-500">
@@ -21,10 +21,10 @@
         </div>
       </div>
       <div class="bg-gray-200 md:text-base text-sm border-b p-2 py-2 pb-8">
-        <p>{{ content.msg }}</p>
+        <Table v-bind:title="content.title" v-bind:source="content.data" />
       </div>
       <div class="bg-grey p-2 flex justify-end rounded-b">
-        <Button color="alert" v-bind:action="removePopup"> Close </Button>
+        <Button v-bind:action="removePopup"> Close </Button>
         <Button v-if="acceptActionExists()" v-bind:action="acceptPopup">
           OK
         </Button>
@@ -37,12 +37,14 @@
 import { IconInfoRounded } from '@iconify-prerendered/vue-material-symbols'
 import { Options, Vue } from 'vue-class-component'
 import { popupModalStore } from '../content/stores'
+import Table from '../table/Table.vue'
 import Button from './Button.vue'
 
 @Options({
   components: {
     Button,
     IconInfoRounded,
+    Table,
   },
 })
 export default class PopupModal extends Vue {
@@ -59,9 +61,7 @@ export default class PopupModal extends Vue {
   }
 
   acceptPopup() {
-    if (!this.acceptActionExists()) return
-
-    popupModalStore.content.okAction!()
+    popupModalStore.content.okAction?.call({})
   }
 }
 </script>

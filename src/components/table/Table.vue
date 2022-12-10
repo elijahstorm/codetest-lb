@@ -9,14 +9,14 @@
         v-on:click="hideTable()"
         width="30"
         height="30"
-        class="cursor-pointer"
+        class="expand-table cursor-pointer"
       />
       <IconExpandContent
         v-else
         v-on:click="hideTable()"
         width="30"
         height="30"
-        class="cursor-pointer"
+        class="expand-table cursor-pointer"
       />
     </div>
     <div v-bind:class="hidden ? 'max-h-0' : ''" class="flex overflow-auto">
@@ -48,7 +48,11 @@ import {
 type SortState = 'none' | 'asc' | 'des'
 
 class Props {
-  source: any[] = prop({
+  source: ({
+    [key: string]: string | undefined
+  } & {
+    __index: number
+  })[] = prop({
     required: true,
   })
   title: string = prop({
@@ -90,7 +94,7 @@ export default class Table extends Vue.with(Props) {
 
   get items() {
     return [...this.source].map((item, index) => {
-      item['__index'] = index
+      item.__index = index
       return item
     })
   }
@@ -108,10 +112,12 @@ export default class Table extends Vue.with(Props) {
       return this.sortState === 'asc' ? items.reverse() : items
     }
 
-    return items.sort((a, b) =>
-      this.sortState === 'asc'
-        ? b[sortedColumn]?.toString().localeCompare(a[sortedColumn])
-        : a[sortedColumn]?.toString().localeCompare(b[sortedColumn]),
+    return items.sort(
+      (a, b) =>
+        (this.sortState === 'asc'
+          ? b[sortedColumn]?.toString().localeCompare(a[sortedColumn] ?? '')
+          : a[sortedColumn]?.toString().localeCompare(b[sortedColumn] ?? '')) ??
+        0,
     )
   }
 }
