@@ -14,7 +14,7 @@
           v-bind:class="column === 'description' ? 'w-80' : ''"
         >
           {{ column }}
-          <div v-if="sortIndex === index" class="text-xl">
+          <div v-if="sortIndex === index" class="sort-dir text-xl">
             <IconSortAsc v-if="sortState === 'asc'" />
             <IconSortDesc v-else-if="sortState === 'des'" />
           </div>

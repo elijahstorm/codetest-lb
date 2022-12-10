@@ -9,14 +9,14 @@
         v-on:click="hideTable()"
         width="30"
         height="30"
-        class="cursor-pointer"
+        class="expand-table cursor-pointer"
       />
       <IconExpandContent
         v-else
         v-on:click="hideTable()"
         width="30"
         height="30"
-        class="cursor-pointer"
+        class="expand-table cursor-pointer"
       />
     </div>
     <div v-bind:class="hidden ? 'max-h-0' : ''" class="flex overflow-auto">

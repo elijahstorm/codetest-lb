@@ -1,5 +1,12 @@
-import { shallowMount } from '@vue/test-utils'
-import Table from '@/components/Table.vue'
+import { mount } from '@vue/test-utils'
+import Table from '@/components/table/Table.vue'
+
+jest.mock('@iconify-prerendered/vue-lucide', () => ({
+  FontAwesomeIcon: '',
+}))
+jest.mock('@iconify-prerendered/vue-material-symbols', () => ({
+  FontAwesomeIcon: '',
+}))
 
 describe('Table.vue', () => {
   it('renders props.msg when passed', () => {
@@ -9,14 +16,16 @@ describe('Table.vue', () => {
         text: 'hello',
       },
       {
-        id: '1',
+        id: '3',
         text: 'friend',
       },
     ]
-    const wrapper = shallowMount(Table, {
-      props: { source },
+    const title = 'test'
+    const wrapper = mount(Table, {
+      props: { source, title },
     })
-    expect(wrapper.text()).toMatch(source[0].text)
-    expect(wrapper.text()).toMatch(source[1].text)
+    expect(wrapper.text()).toMatch(new RegExp(`${title}`, 'i'))
+    expect(wrapper.text()).toMatch(new RegExp(`${source[0].text}`, 'i'))
+    expect(wrapper.text()).toMatch(new RegExp(`${source[1].text}`, 'i'))
   })
 })
