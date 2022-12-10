@@ -65,8 +65,6 @@ export default class DataContainer extends Vue {
       (filter) => filter.selected,
     )
 
-    console.log({ filtersEnabled })
-
     // if no filters are enabled, return the full list
     if (filtersEnabled === -1) {
       return source
