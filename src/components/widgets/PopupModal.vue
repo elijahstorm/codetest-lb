@@ -24,7 +24,7 @@
         <Table v-bind:title="content.title" v-bind:source="content.data" />
       </div>
       <div class="bg-grey p-2 flex justify-end rounded-b">
-        <Button color="alert" v-bind:action="removePopup"> Close </Button>
+        <Button v-bind:action="removePopup"> Close </Button>
         <Button v-if="acceptActionExists()" v-bind:action="acceptPopup">
           OK
         </Button>

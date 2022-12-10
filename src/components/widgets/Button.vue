@@ -1,8 +1,8 @@
 <template>
   <button
     type="button"
-    class="flex gap-2 text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
-    v-bind:class="typeof color !== 'undefined' ? `bg-${color}` : ''"
+    class="flex gap-2 text-white bg-primary-800 hover:bg-primary-700 font-medium rounded-lg text-sm px-5 py-3 mr-2 mb-2 focus:ring-4 focus:outline-none focus:ring-primary-300 transition-colors"
+    v-bind:class="icon ? 'pl-4 pr-5' : ''"
     v-on:click="performAction()"
   >
     <slot />
@@ -14,6 +14,7 @@ import { Options, Vue, prop } from 'vue-class-component'
 
 class Props {
   color?: string = prop({})
+  icon?: boolean = prop({})
   action: () => void = prop({
     required: true,
   })
