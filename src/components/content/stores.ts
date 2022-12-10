@@ -4,13 +4,13 @@ export const popupModalStore = reactive<{
   shown: boolean
   content: {
     title: string
-    msg: string
+    data: any
     okAction?: () => void
   }
 }>({
   shown: false,
   content: {
     title: '',
-    msg: '',
+    data: {},
   },
 })

@@ -9,6 +9,7 @@
         v-on:click="toggleSortState(index)"
       >
         <div
+          v-if="column !== '__index'"
           class="min-w-full flex justify-between"
           v-bind:class="column === 'description' ? 'w-80' : ''"
         >
@@ -54,7 +55,6 @@ class Props {
 })
 export default class ColumnHeader extends Vue.with(Props) {
   toggleSortState(index: number) {
-    if (index === 1) return
     this.sortAction(index)
   }
 

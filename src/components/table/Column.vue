@@ -8,8 +8,26 @@
       >
         <template v-if="columnIndex === 0">
           <span class="font-bold">
-            {{ item.__index }}
+            {{ item.__index + 1 }}
           </span>
+        </template>
+        <template v-else-if="column === '__index'" />
+        <template v-else-if="item[column] === null">
+          <IconCloseRounded class="text-alert" width="40" height="40"
+        /></template>
+        <template
+          v-else-if="
+            Object.prototype.toString.call(item[column]) === '[object Date]'
+          "
+        >
+          {{
+            item[column].toLocaleDateString('en-us', {
+              weekday: 'long',
+              year: 'numeric',
+              month: 'short',
+              day: 'numeric',
+            })
+          }}
         </template>
         <template v-else-if="typeof item[column] === 'object'">
           <Button
@@ -22,9 +40,10 @@
               height="20"
               class="cursor-pointer inline"
             />
-            <span> Object </span>
+            <span> Details </span>
           </Button>
         </template>
+
         <template v-else-if="typeof item[column] === 'boolean'">
           <IconCheck
             v-if="item[column]"
@@ -32,7 +51,7 @@
             width="40"
             height="40"
           />
-          <IconCross v-else class="text-alert" width="40" height="40" />
+          <IconCloseRounded v-else class="text-alert" width="40" height="40" />
         </template>
         <template v-else>
           {{ item[column] ?? '--' }}
@@ -43,8 +62,11 @@
 </template>
 
 <script lang="ts">
-import { IconCheck, IconCross } from '@iconify-prerendered/vue-lucide'
-import { IconExpandContent } from '@iconify-prerendered/vue-material-symbols'
+import { IconCheck } from '@iconify-prerendered/vue-lucide'
+import {
+  IconExpandContent,
+  IconCloseRounded,
+} from '@iconify-prerendered/vue-material-symbols'
 import { Options, Vue, prop } from 'vue-class-component'
 import Button from '../widgets/Button.vue'
 import { popupModalStore } from '../content/stores'
@@ -62,15 +84,15 @@ class Props {
   components: {
     Button,
     IconCheck,
-    IconCross,
+    IconCloseRounded,
     IconExpandContent,
   },
 })
 export default class Column extends Vue.with(Props) {
-  expandObject(column: string, data: any) {
+  expandObject(title: string, data: any) {
     popupModalStore.content = {
-      title: column,
-      msg: '<strong>yo</strong>',
+      title,
+      data,
     }
     popupModalStore.shown = true
   }
