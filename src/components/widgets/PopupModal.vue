@@ -61,9 +61,7 @@ export default class PopupModal extends Vue {
   }
 
   acceptPopup() {
-    if (!this.acceptActionExists()) return
-
-    popupModalStore.content.okAction!()
+    popupModalStore.content.okAction?.call({})
   }
 }
 </script>

@@ -30,15 +30,19 @@ export default class DataContainer extends Vue {
       this.sourceData = json as DataFormat
       this.loading = false
     }
-    readableContent(setData)
-    // fetchDemoData(setData)
+    process.env.NODE_ENV === 'development'
+      ? fetchDemoData(setData)
+      : readableContent(setData)
   }
 
   get items() {
     const source = [...(this.sourceData?.features.items ?? [])]
 
     const formatted = source.map((item) => {
-      const output: any = {}
+      const output: {
+        screenshots?: object[]
+        FeatureEditions?: object[]
+      } = {}
 
       output.screenshots = item.screenshots.map((screenshot) => ({
         processed: screenshot.status === 'processed',

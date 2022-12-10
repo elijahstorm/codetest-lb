@@ -89,7 +89,7 @@ class Props {
   },
 })
 export default class Column extends Vue.with(Props) {
-  expandObject(title: string, data: any) {
+  expandObject(title: string, data: object) {
     popupModalStore.content = {
       title,
       data,
