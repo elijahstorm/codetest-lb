@@ -1,6 +1,6 @@
 <template>
   <div class="bg-white text-primary min-w-full min-h-full">
-    <section class="py-32 sm:p-16 lg:p-32">
+    <section class="px-4 py-32 sm:p-16 lg:p-32">
       <DataContainer />
     </section>
   </div>

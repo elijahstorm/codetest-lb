@@ -2,7 +2,7 @@
   <div v-if="loading">loading....</div>
   <div v-else>
     <div class="grid gap-8 grid-cols-1 justify-center content-start">
-      <SelectorFilters />
+      <SelectorFilters prompt="Edition filters:" />
       <Table title="Features" v-bind:source="items" />
     </div>
   </div>
