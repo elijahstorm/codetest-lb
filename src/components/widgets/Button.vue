@@ -13,8 +13,12 @@
 import { Options, Vue, prop } from 'vue-class-component'
 
 class Props {
-  color?: string = prop({})
-  icon?: boolean = prop({})
+  color?: string = prop({
+    type: String,
+  })
+  icon?: boolean = prop({
+    type: Boolean,
+  })
   action: () => void = prop({
     required: true,
   })

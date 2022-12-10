@@ -3,7 +3,7 @@
   <div v-else>
     <div class="grid gap-8 grid-cols-1 justify-center content-start">
       <SelectorFilters prompt="Edition filters:" />
-      <Table title="Features" v-bind:source="items" />
+      <Table title="Features" v-bind:source="items" shadow />
     </div>
   </div>
   <PopupModal />

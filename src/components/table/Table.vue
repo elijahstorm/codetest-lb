@@ -1,23 +1,26 @@
 <template>
   <div
-    class="p-4 rounded-md border-solid border-shadow border shadow-md overflow-hidden h-min-content"
+    class="p-4 rounded-md border-solid overflow-hidden h-min-content"
+    v-bind:class="this.shadow ? 'border-shadow border shadow-md' : ''"
   >
     <div class="flex justify-between items-center">
       <h2 class="text-2xl font-bold p-4">{{ this.title }}</h2>
-      <IconHide
-        v-if="!hidden"
-        v-on:click="hideTable()"
-        width="30"
-        height="30"
-        class="expand-table cursor-pointer"
-      />
-      <IconExpandContent
-        v-else
-        v-on:click="hideTable()"
-        width="30"
-        height="30"
-        class="expand-table cursor-pointer"
-      />
+      <template v-if="this.shadow">
+        <IconHide
+          v-if="!hidden"
+          v-on:click="hideTable()"
+          width="30"
+          height="30"
+          class="expand-table cursor-pointer"
+        />
+        <IconExpandContent
+          v-else
+          v-on:click="hideTable()"
+          width="30"
+          height="30"
+          class="expand-table cursor-pointer"
+        />
+      </template>
     </div>
     <div v-bind:class="hidden ? 'max-h-0' : ''" class="flex overflow-auto">
       <table
@@ -57,6 +60,10 @@ class Props {
   })
   title: string = prop({
     required: true,
+    type: String,
+  })
+  shadow?: boolean = prop({
+    type: Boolean,
   })
 }
 

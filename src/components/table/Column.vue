@@ -30,10 +30,7 @@
           }}
         </template>
         <template v-else-if="typeof item[column] === 'object'">
-          <Button
-            icon="true"
-            v-bind:action="() => expandObject(column, item[column])"
-          >
+          <Button v-bind:action="() => expandObject(column, item[column])" icon>
             <IconExpandContent
               width="20"
               height="20"
