@@ -10,7 +10,7 @@
     "test:e2e": "vue-cli-service test:e2e --headless",
     "cypress": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint",
-    "push": "pnpm test && aws s3 cp ./dist s3://codetest-lb --recursive --profile elijahstorm"
+    "push": "pnpm test && pnpm build && aws s3 cp ./dist s3://codetest-lb --recursive --profile elijahstorm"
   },
   "dependencies": {
     "@iconify-prerendered/vue-lucide": "^0.16.1669121575",
