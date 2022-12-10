@@ -8,7 +8,7 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
-import DataContainer from './components/DataContainer.vue'
+import DataContainer from './components/dataFormats/DataContainer.vue'
 
 @Options({
   components: {

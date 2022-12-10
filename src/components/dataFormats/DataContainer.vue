@@ -10,64 +10,10 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
-import Table from './table/Table.vue'
-import PopupModal from './widgets/PopupModal.vue'
-import { fetchDemoData, readableContent } from './content/readable'
-
-type ItemContainer<T> = {
-  items: T[]
-}
-
-type Screenshot = {
-  status: string
-  mode: string
-  timeOfCapture: string
-  filekeyRaw: string
-  filekeyStyled: string
-  filesize: string | null
-}
-
-type Edition = {
-  id: string
-  name: string
-  description?: string
-}
-
-type Feature = {
-  id: string
-  name: string
-  description: string
-  URL: string
-  selector: string
-  takeScreenshot: boolean
-  filename: string
-  screenshots: Screenshot[]
-  FeatureEditions: ItemContainer<FeatureEdition>
-}
-
-type FeatureEdition = {
-  edition: Edition
-  limit: unknown | null
-  limitType: unknown | null
-  constraint: unknown | null
-  constraintType: unknown | null
-  speed: unknown | null
-  speedType: unknown | null
-}
-
-type DataFormat = {
-  id: string
-  name: string
-  tagline: string
-  description: string | null
-  URL: string
-  modeDesktopLight: boolean
-  modeDesktopDark: boolean
-  modeMobileLight: boolean
-  modeMobileDark: boolean
-  editions: ItemContainer<Edition>
-  features: ItemContainer<Feature>
-}
+import Table from '../table/Table.vue'
+import PopupModal from '../widgets/PopupModal.vue'
+import { fetchDemoData, readableContent } from '../content/readable'
+import type { DataFormat } from '../dataFormats/types'
 
 @Options({
   components: {
@@ -84,10 +30,8 @@ export default class DataContainer extends Vue {
       this.sourceData = json as DataFormat
       this.loading = false
     }
-    // readableContent(
-    //   setData
-    // )
-    fetchDemoData(setData)
+    readableContent(setData)
+    // fetchDemoData(setData)
   }
 
   get items() {
